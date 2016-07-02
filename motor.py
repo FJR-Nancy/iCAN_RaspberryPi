@@ -1,70 +1,79 @@
 import RPi.GPIO as GPIO
-from time import sleep
 
-def init():
-    GPIO.setmode(GPIO.BOARD)
+class Motor:
+    motor1A = 18
+    motor1B = 16
+    motor1E = 22
 
-    Motor1A = 18
-    Motor1B = 16
-    Motor1E = 22
+    motor2A = 23
+    motor2B = 21
+    motor2E = 19
 
-    Motor2A = 23
-    Motor2B = 21
-    Motor2E = 19
+    gpio = GPIO
+        
+    def init(self):
+        gpio = self.gpio
+        gpio.setmode(GPIO.BOARD)
+        gpio.setup(self.motor1A,GPIO.OUT)
+        gpio.setup(self.motor1B,GPIO.OUT)
+        gpio.setup(self.motor1E,GPIO.OUT)
 
-    GPIO.setup(Motor1A,GPIO.OUT)
-    GPIO.setup(Motor1B,GPIO.OUT)
-    GPIO.setup(Motor1E,GPIO.OUT)
+        gpio.setup(self.motor2A,GPIO.OUT)
+        gpio.setup(self.motor2B,GPIO.OUT)
+        gpio.setup(self.motor2E,GPIO.OUT)
 
-    GPIO.setup(Motor2A,GPIO.OUT)
-    GPIO.setup(Motor2B,GPIO.OUT)
-    GPIO.setup(Motor2E,GPIO.OUT)
+    def forwards(self):
+        gpio = self.gpio
+        gpio.output(self.motor1A,GPIO.HIGH)
+        gpio.output(self.motor1B,GPIO.LOW)
+        gpio.output(self.motor1E,GPIO.HIGH)
 
-def forwards():
-    GPIO.output(Motor1A,GPIO.HIGH)
-    GPIO.output(Motor1B,GPIO.LOW)
-    GPIO.output(Motor1E,GPIO.HIGH)
+        gpio.output(self.motor2A,GPIO.HIGH)
+        gpio.output(self.motor2B,GPIO.LOW)
+        gpio.output(self.motor2E,GPIO.HIGH)
+        print "Going forwards"
 
-    GPIO.output(Motor2A,GPIO.HIGH)
-    GPIO.output(Motor2B,GPIO.LOW)
-    GPIO.output(Motor2E,GPIO.HIGH)
-    print "Going forwards"
+    def backwards(self):
+        gpio = self.gpio
+        gpio.output(self.motor1A,GPIO.LOW)
+        gpio.output(self.motor1B,GPIO.HIGH)
+        gpio.output(self.motor1E,GPIO.HIGH)
 
-def backwards():
-    GPIO.output(Motor1A,GPIO.LOW)
-    GPIO.output(Motor1B,GPIO.HIGH)
-    GPIO.output(Motor1E,GPIO.HIGH)
+        gpio.output(self.motor2A,GPIO.LOW)
+        gpio.output(self.motor2B,GPIO.HIGH)
+        gpio.output(self.motor2E,GPIO.HIGH)
+        print "Going backwards"
 
-    GPIO.output(Motor2A,GPIO.LOW)
-    GPIO.output(Motor2B,GPIO.HIGH)
-    GPIO.output(Motor2E,GPIO.HIGH)
-    print "Going backwards"
+    def left(self):
+        gpio = self.gpio
+        gpio.output(self.motor1A,GPIO.HIGH)
+        gpio.output(self.motor1B,GPIO.LOW)
+        gpio.output(self.motor1E,GPIO.HIGH)
 
-def left():
-    GPIO.output(Motor1A,GPIO.LOW)
-    GPIO.output(Motor1B,GPIO.HIGH)
-    GPIO.output(Motor1E,GPIO.HIGH)
+        gpio.output(self.motor2A,GPIO.LOW)
+        gpio.output(self.motor2B,GPIO.LOW)
+        gpio.output(self.motor2E,GPIO.LOW)
+        print "Turn left"
+        
+    def right(self):
+        gpio = self.gpio
+        gpio.output(self.motor1A,GPIO.LOW)
+        gpio.output(self.motor1B,GPIO.LOW)
+        gpio.output(self.motor1E,GPIO.LOW)
 
-    GPIO.output(Motor2A,GPIO.LOW)
-    GPIO.output(Motor2B,GPIO.LOW)
-    GPIO.output(Motor2E,GPIO.LOW)
-    print "Going backwards"
+        gpio.output(self.motor2A,GPIO.HIGH)
+        gpio.output(self.motor2B,GPIO.LOW)
+        gpio.output(self.motor2E,GPIO.HIGH)
+        print "Turn right"
 
-def right():
-    GPIO.output(Motor1A,GPIO.LOW)
-    GPIO.output(Motor1B,GPIO.LOW)
-    GPIO.output(Motor1E,GPIO.LOW)
+    def stop(self):
+        gpio = self.gpio
+        gpio.output(self.motor1E,GPIO.LOW)
+        gpio.output(self.motor2E,GPIO.LOW)
+        print "Now stop"
 
-    GPIO.output(Motor2A,GPIO.LOW)
-    GPIO.output(Motor2B,GPIO.HIGH)
-    GPIO.output(Motor2E,GPIO.HIGH)
-    print "Going backwards"
+    def exit(self):
+        gpio = self.gpio
+        gpio.cleanup()
 
-def stop():
-    GPIO.output(Motor1E,GPIO.LOW)
-    GPIO.output(Motor2E,GPIO.LOW)
-    print "Now stop"
-
-def exit():
-    GPIO.cleanup()
 

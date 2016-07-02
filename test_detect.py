@@ -26,6 +26,6 @@ while True:
     
     camera.capture(IMAGE_FILE)
     
-    if words != '' || cv2.waitKey(1) & 0xFF == ord('q'):
+    if words != '' or cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
