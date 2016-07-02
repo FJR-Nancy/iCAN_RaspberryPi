@@ -40,6 +40,26 @@ def backwards():
     GPIO.output(Motor2E,GPIO.HIGH)
     print "Going backwards"
 
+def left():
+    GPIO.output(Motor1A,GPIO.LOW)
+    GPIO.output(Motor1B,GPIO.HIGH)
+    GPIO.output(Motor1E,GPIO.HIGH)
+
+    GPIO.output(Motor2A,GPIO.LOW)
+    GPIO.output(Motor2B,GPIO.LOW)
+    GPIO.output(Motor2E,GPIO.LOW)
+    print "Going backwards"
+
+def right():
+    GPIO.output(Motor1A,GPIO.LOW)
+    GPIO.output(Motor1B,GPIO.LOW)
+    GPIO.output(Motor1E,GPIO.LOW)
+
+    GPIO.output(Motor2A,GPIO.LOW)
+    GPIO.output(Motor2B,GPIO.HIGH)
+    GPIO.output(Motor2E,GPIO.HIGH)
+    print "Going backwards"
+
 def stop():
     GPIO.output(Motor1E,GPIO.LOW)
     GPIO.output(Motor2E,GPIO.LOW)
@@ -47,3 +67,4 @@ def stop():
 
 def exit():
     GPIO.cleanup()
+
